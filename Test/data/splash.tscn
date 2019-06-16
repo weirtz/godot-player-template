@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://data/splash.gd" type="Script" id=1]
+[ext_resource path="res://godot_logo.png" type="Texture" id=2]
+[ext_resource path="res://nullnut_logo.png" type="Texture" id=3]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="main" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="main"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="godot_logo" type="Sprite" parent="main/MarginContainer"]
+position = Vector2( 958.685, 569.498 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="main"]
+margin_left = 16.3667
+margin_top = 529.024
+margin_right = 240.367
+margin_bottom = 584.024
+
+[node name="Sprite" type="Sprite" parent="main/MarginContainer2"]
+position = Vector2( 109.321, 27.421 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )

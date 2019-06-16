@@ -1,0 +1,183 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Spatial.gd" type="Script" id=1]
+[ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/environment/skybox/skybox.png" type="Texture" id=3]
+[ext_resource path="res://Audio.gd" type="Script" id=4]
+[ext_resource path="res://assets/sound/player/jump/jump.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/test/2.png" type="Texture" id=6]
+
+[sub_resource type="PanoramaSky" id=16]
+panorama = ExtResource( 3 )
+
+[sub_resource type="Environment" id=17]
+background_mode = 2
+background_sky = SubResource( 16 )
+
+[sub_resource type="CapsuleShape" id=2]
+
+[sub_resource type="CapsuleMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+metallic = 0.7
+metallic_specular = 1.0
+roughness = 0.3
+
+[sub_resource type="CapsuleMesh" id=5]
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="PlaneMesh" id=7]
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.137255, 0.741176, 0.192157, 1 )
+
+[sub_resource type="ConvexPolygonShape" id=9]
+points = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1 )
+
+[sub_resource type="PrismMesh" id=10]
+
+[sub_resource type="ConcavePolygonShape" id=14]
+data = PoolVector3Array( 0, 1, 1, 1, -1, 1, -1, -1, 1, 0, 1, -1, -1, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, -1, 1, -1, 1, 0, 1, -1, 1, -1, -1, 1, -1, 1, 0, 1, -1, 0, 1, 1, -1, -1, -1, 0, 1, 1, -1, -1, 1, -1, -1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=11]
+
+[sub_resource type="ConcavePolygonShape" id=15]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="SpatialMaterial" id=19]
+flags_transparent = true
+flags_unshaded = true
+params_cull_mode = 2
+params_billboard_mode = 1
+params_billboard_keep_scale = true
+
+[sub_resource type="Animation" id=18]
+resource_name = "bee"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.000370107, 1.0438, 0.405161 ), Vector3( 0.000370107, 1.26757, 0.405161 ), Vector3( 0.000370107, 1.0438, 0.405161 ) ]
+}
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="KinematicBody" type="KinematicBody" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.0126817, 0.201525, -0.0331175 )
+script = ExtResource( 2 )
+
+[node name="Positioning" type="Spatial" parent="KinematicBody"]
+
+[node name="GUI" type="Control" parent="KinematicBody"]
+editor/display_folded = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="console" type="Control" parent="KinematicBody/GUI"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="text_fps" type="RichTextLabel" parent="KinematicBody/GUI/console"]
+margin_right = 82.0
+margin_bottom = 15.0
+text = "FPS: null"
+
+[node name="text_movement" type="RichTextLabel" parent="KinematicBody/GUI/console"]
+anchor_bottom = 1.0
+margin_top = 15.0
+margin_right = 151.0
+margin_bottom = -8.0
+text = "Movement: null"
+
+[node name="text_fov" type="RichTextLabel" parent="KinematicBody/GUI/console"]
+anchor_bottom = 1.0
+margin_top = 31.0
+margin_right = 156.0
+margin_bottom = 6.0
+text = "FOV: null"
+
+[node name="Player_Camera" type="Camera" parent="KinematicBody"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0.126819, 0.915762, -0.963153 )
+environment = SubResource( 17 )
+fov = 64.0
+near = 0.01
+far = 900.0
+
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="PlayerMesh" type="MeshInstance" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MeshInstance" type="MeshInstance" parent="KinematicBody/PlayerMesh"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, -8.88178e-016, 0, 8.88178e-016, 0.1, -0.3, -0.951, -0.615 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="KinematicBody/PlayerMesh"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, -8.88178e-016, 0, 8.88178e-016, 0.1, 0.3, -0.951, -0.615 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="Audio" type="Spatial" parent="KinematicBody"]
+script = ExtResource( 4 )
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="KinematicBody/Audio"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
+stream = ExtResource( 5 )
+bus = "Player"
+
+[node name="World" type="Spatial" parent="."]
+transform = Transform( 335.453, 0, 0, 0, 1, 0, 0, 0, 71.9987, 0, -0.0292983, -31.9397 )
+
+[node name="grass" type="MeshInstance" parent="World"]
+transform = Transform( 0.0149052, 0, 0, 0, 0.416137, 0, 0, 0, 0.0694457, 0, 0.0292983, 0.443615 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="StaticBody" type="StaticBody" parent="World/grass"]
+
+[node name="CollisionShape" type="CollisionShape" parent="World/grass/StaticBody"]
+shape = SubResource( 9 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="World/grass"]
+transform = Transform( 1, 0, 0, 0, 5.20108, 0, 0, 0, 1, 0.926862, 4.01053e-006, 0.347677 )
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="World/grass/MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="World/grass/MeshInstance2/StaticBody"]
+shape = SubResource( 14 )
+
+[node name="MeshInstance" type="MeshInstance" parent="World/grass"]
+transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 1, -1.27314, 0, -1.05232 )
+mesh = SubResource( 11 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="World/grass/MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="World/grass/MeshInstance/StaticBody"]
+shape = SubResource( 15 )
+
+[node name="Sprite3D" type="Sprite3D" parent="World"]
+transform = Transform( 0.000582822, 0, 0, 0, 0.168714, 0, 0, 0, 0.015, 0.000370107, 1.1526, 0.405161 )
+material_override = SubResource( 19 )
+texture = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Sprite3D"]
+autoplay = "bee"
+anims/bee = SubResource( 18 )
