@@ -1,59 +1,112 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Spatial.gd" type="Script" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
-[ext_resource path="res://assets/environment/skybox/skybox.png" type="Texture" id=3]
-[ext_resource path="res://Audio.gd" type="Script" id=4]
-[ext_resource path="res://assets/sound/player/jump/jump.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/test/2.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/gui/health.png" type="Texture" id=3]
+[ext_resource path="res://assets/player.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Audio.gd" type="Script" id=5]
+[ext_resource path="res://assets/sound/player/jump/jump.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sound/player/walking/walking.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/environment/grass/grass.png" type="Texture" id=8]
+[ext_resource path="res://assets/environment/grass/grass_normal.png" type="Texture" id=9]
+[ext_resource path="res://assets/test/2.png" type="Texture" id=10]
+[ext_resource path="res://nullnut_logo.png" type="Texture" id=11]
 
-[sub_resource type="PanoramaSky" id=16]
-panorama = ExtResource( 3 )
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.0196078, 0.992157, 0.968627, 1 )
+sky_horizon_color = Color( 0.192157, 0.486275, 0.8, 1 )
+sky_curve = 0.626795
+sky_energy = 1.75
+sun_color = Color( 0.878431, 0.854902, 0.227451, 1 )
+sun_latitude = -133.51
+sun_longitude = 29.65
+sun_angle_min = 5.24
+sun_angle_max = 12.3
+sun_curve = 0.3249
+sun_energy = 3.26
 
-[sub_resource type="Environment" id=17]
+[sub_resource type="Environment" id=2]
 background_mode = 2
-background_sky = SubResource( 16 )
+background_sky = SubResource( 1 )
+ambient_light_sky_contribution = 0.58
+fog_depth_enabled = false
+fog_depth_begin = 0.0
+fog_depth_end = 879.1
+fog_depth_curve = 2.92817
+ss_reflections_max_steps = 63
+ss_reflections_fade_in = 6.11789
+ss_reflections_fade_out = 0.707107
+ss_reflections_depth_tolerance = 52.2
+ssao_enabled = true
+ssao_radius2 = 2.8
+ssao_intensity2 = 0.0
+ssao_light_affect = 0.57
+ssao_quality = 1
+ssao_edge_sharpness = 32.0
+dof_blur_far_enabled = true
+dof_blur_far_transition = 1473.32
+dof_blur_far_amount = 0.09
+dof_blur_far_quality = 2
+dof_blur_near_enabled = true
+dof_blur_near_distance = 0.2
+dof_blur_near_transition = 0.17
+dof_blur_near_amount = 0.34
+dof_blur_near_quality = 2
+adjustment_brightness = 0.03
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="Animation" id=3]
+resource_name = "sun"
+length = 30.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:environment:background_sky:sun_latitude")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 30 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 180.0, -180.0 ]
+}
 
-[sub_resource type="CapsuleMesh" id=3]
+[sub_resource type="CapsuleShape" id=4]
 
-[sub_resource type="SpatialMaterial" id=4]
-metallic = 0.7
-metallic_specular = 1.0
-roughness = 0.3
+[sub_resource type="PrismMesh" id=5]
 
-[sub_resource type="CapsuleMesh" id=5]
-
-[sub_resource type="SpatialMaterial" id=6]
-albedo_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="PlaneMesh" id=7]
-
-[sub_resource type="SpatialMaterial" id=8]
-albedo_color = Color( 0.137255, 0.741176, 0.192157, 1 )
-
-[sub_resource type="ConvexPolygonShape" id=9]
-points = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1 )
-
-[sub_resource type="PrismMesh" id=10]
-
-[sub_resource type="ConcavePolygonShape" id=14]
+[sub_resource type="ConcavePolygonShape" id=6]
 data = PoolVector3Array( 0, 1, 1, 1, -1, 1, -1, -1, 1, 0, 1, -1, -1, -1, -1, 1, -1, -1, 0, 1, 1, 0, 1, -1, 1, -1, 1, 0, 1, -1, 1, -1, -1, 1, -1, 1, 0, 1, -1, 0, 1, 1, -1, -1, -1, 0, 1, 1, -1, -1, 1, -1, -1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="CubeMesh" id=11]
+[sub_resource type="CubeMesh" id=7]
 
-[sub_resource type="ConcavePolygonShape" id=15]
+[sub_resource type="ConcavePolygonShape" id=8]
 data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="SpatialMaterial" id=19]
+[sub_resource type="ConcavePolygonShape" id=9]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="PlaneMesh" id=10]
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_texture = ExtResource( 8 )
+normal_enabled = true
+normal_scale = 10.29
+normal_texture = ExtResource( 9 )
+uv1_scale = Vector3( 30, 30, 30 )
+uv1_triplanar = true
+
+[sub_resource type="ConvexPolygonShape" id=12]
+points = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1 )
+
+[sub_resource type="SpatialMaterial" id=13]
 flags_transparent = true
 flags_unshaded = true
 params_cull_mode = 2
 params_billboard_mode = 1
 params_billboard_keep_scale = true
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=14]
 resource_name = "bee"
 loop = true
 tracks/0/type = "value"
@@ -69,6 +122,35 @@ tracks/0/keys = {
 "values": [ Vector3( 0.000370107, 1.0438, 0.405161 ), Vector3( 0.000370107, 1.26757, 0.405161 ), Vector3( 0.000370107, 1.0438, 0.405161 ) ]
 }
 
+[sub_resource type="CubeMesh" id=15]
+
+[sub_resource type="SpatialMaterial" id=16]
+albedo_texture = ExtResource( 3 )
+uv1_scale = Vector3( -7.03, -21.01, 1 )
+
+[sub_resource type="ConcavePolygonShape" id=17]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="ConcavePolygonShape" id=18]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="ConcavePolygonShape" id=19]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="ConcavePolygonShape" id=20]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=21]
+
+[sub_resource type="SpatialMaterial" id=22]
+albedo_texture = ExtResource( 11 )
+uv1_scale = Vector3( 19.54, 35.93, 1 )
+uv1_offset = Vector3( 0.85, 0, 0 )
+uv1_triplanar_sharpness = 0.659754
+
+[sub_resource type="ConcavePolygonShape" id=23]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -76,108 +158,295 @@ script = ExtResource( 1 )
 transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.0126817, 0.201525, -0.0331175 )
 script = ExtResource( 2 )
 
-[node name="Positioning" type="Spatial" parent="KinematicBody"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="KinematicBody"]
+environment = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody/WorldEnvironment"]
+autoplay = "sun"
+anims/sun = SubResource( 3 )
 
 [node name="GUI" type="Control" parent="KinematicBody"]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="console" type="Control" parent="KinematicBody/GUI"]
+editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
+[node name="background" type="ColorRect" parent="KinematicBody/GUI/console"]
+margin_top = 0.431213
+margin_right = 297.0
+margin_bottom = 140.431
+color = Color( 0, 0, 0, 0.788235 )
+
 [node name="text_fps" type="RichTextLabel" parent="KinematicBody/GUI/console"]
-margin_right = 82.0
-margin_bottom = 15.0
+margin_left = 8.0
+margin_top = 7.0
+margin_right = 90.0
+margin_bottom = 22.0
 text = "FPS: null"
 
 [node name="text_movement" type="RichTextLabel" parent="KinematicBody/GUI/console"]
 anchor_bottom = 1.0
-margin_top = 15.0
-margin_right = 151.0
-margin_bottom = -8.0
+margin_left = 8.0
+margin_top = 22.0
+margin_right = 159.0
+margin_bottom = -1.0
 text = "Movement: null"
 
 [node name="text_fov" type="RichTextLabel" parent="KinematicBody/GUI/console"]
 anchor_bottom = 1.0
-margin_top = 31.0
-margin_right = 156.0
-margin_bottom = 6.0
+margin_left = 8.0
+margin_top = 38.0
+margin_right = 164.0
+margin_bottom = 13.0
 text = "FOV: null"
 
+[node name="text_contact" type="RichTextLabel" parent="KinematicBody/GUI/console"]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 54.0
+margin_right = 264.0
+margin_bottom = 29.0
+text = "Has contact(RayCast): null"
+
+[node name="text_onfloor" type="RichTextLabel" parent="KinematicBody/GUI/console"]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 71.4216
+margin_right = 164.0
+margin_bottom = 46.4216
+text = "Is on floor: null"
+
+[node name="text_position" type="RichTextLabel" parent="KinematicBody/GUI/console"]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 88.0
+margin_right = 164.0
+margin_bottom = 64.0
+text = "Position: null"
+
+[node name="text_speed" type="RichTextLabel" parent="KinematicBody/GUI/console"]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 104.0
+margin_right = 164.0
+margin_bottom = 80.0
+text = "Speed: null"
+
+[node name="health" type="Control" parent="KinematicBody/GUI"]
+editor/display_folded = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="KinematicBody/GUI/health"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -26.0069
+margin_top = 549.256
+margin_right = 10.9931
+margin_bottom = 546.256
+
+[node name="Sprite" type="Sprite" parent="KinematicBody/GUI/health/MarginContainer"]
+position = Vector2( 17.5284, 21.2645 )
+scale = Vector2( 0.418124, 0.418124 )
+texture = ExtResource( 3 )
+
+[node name="Sprite2" type="Sprite" parent="KinematicBody/GUI/health/MarginContainer"]
+position = Vector2( 61.0508, 21.2645 )
+scale = Vector2( 0.418124, 0.418124 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3" type="Sprite" parent="KinematicBody/GUI/health/MarginContainer"]
+position = Vector2( 103.622, 21.2645 )
+scale = Vector2( 0.418124, 0.418124 )
+texture = ExtResource( 3 )
+
+[node name="pause" type="Control" parent="KinematicBody/GUI"]
+visible = false
+margin_left = 496.744
+margin_top = 136.361
+margin_right = 1202.74
+margin_bottom = 597.361
+
+[node name="ColorRect" type="ColorRect" parent="KinematicBody/GUI/pause"]
+margin_left = -377.0
+margin_top = 33.892
+margin_right = 409.0
+margin_bottom = 292.892
+color = Color( 0, 0, 0, 0.831373 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="KinematicBody/GUI/pause"]
+margin_left = -44.0879
+margin_top = 162.475
+margin_right = 398.912
+margin_bottom = 281.475
+text = "PAUSED"
+
 [node name="Player_Camera" type="Camera" parent="KinematicBody"]
-transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0.126819, 0.915762, -0.963153 )
-environment = SubResource( 17 )
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0.126819, 3.02836, -0.963153 )
 fov = 64.0
 near = 0.01
 far = 900.0
 
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+[node name="RayCast" type="RayCast" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.24414, 0 )
+enabled = true
+
+[node name="Positioning" type="Spatial" parent="KinematicBody"]
+
+[node name="hitbox" type="CollisionShape" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
-[node name="PlayerMesh" type="MeshInstance" parent="KinematicBody"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+[node name="Player" type="Spatial" parent="KinematicBody"]
+transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, 0.106682, 0, 0 )
 
-[node name="MeshInstance" type="MeshInstance" parent="KinematicBody/PlayerMesh"]
-transform = Transform( 0.1, 0, 0, 0, 0.1, -8.88178e-016, 0, 8.88178e-016, 0.1, -0.3, -0.951, -0.615 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
+[node name="MeshInstance" type="MeshInstance" parent="KinematicBody/Player"]
+mesh = ExtResource( 4 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="KinematicBody/PlayerMesh"]
-transform = Transform( 0.1, 0, 0, 0, 0.1, -8.88178e-016, 0, 8.88178e-016, 0.1, 0.3, -0.951, -0.615 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
+[node name="audio" type="Spatial" parent="KinematicBody"]
+script = ExtResource( 5 )
 
-[node name="Audio" type="Spatial" parent="KinematicBody"]
-script = ExtResource( 4 )
-
-[node name="Jump" type="AudioStreamPlayer3D" parent="KinematicBody/Audio"]
+[node name="jump" type="AudioStreamPlayer3D" parent="KinematicBody/audio"]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
+bus = "Player"
+
+[node name="walking" type="AudioStreamPlayer3D" parent="KinematicBody/audio"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
+stream = ExtResource( 7 )
+unit_db = -16.335
+pitch_scale = 0.67
+max_distance = 10.0
 bus = "Player"
 
 [node name="World" type="Spatial" parent="."]
 transform = Transform( 335.453, 0, 0, 0, 1, 0, 0, 0, 71.9987, 0, -0.0292983, -31.9397 )
 
-[node name="grass" type="MeshInstance" parent="World"]
-transform = Transform( 0.0149052, 0, 0, 0, 0.416137, 0, 0, 0, 0.0694457, 0, 0.0292983, 0.443615 )
+[node name="Player2" type="Spatial" parent="World"]
+transform = Transform( -1.30306e-011, 0, -0.000298104, 0, 0.1, 0, 0.00138891, 0, -6.07114e-011, -6.00221e-006, 0.230823, 0.443155 )
+
+[node name="MeshInstance" type="MeshInstance" parent="World/Player2"]
+mesh = ExtResource( 4 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+material/4 = null
+material/5 = null
+material/6 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="World"]
+transform = Transform( 0.0149052, 0, 0, 0, 2.16436, 0, 0, 0, 0.0694457, 0.0138151, 1.01477, 0.46776 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="World"]
+transform = Transform( 0.0149052, 0, 0, 0, 2.16436, 0, 0, 0, 0.0694457, 0.0138151, 1.01477, 0.46776 )
+
+[node name="CollisionShape" type="CollisionShape" parent="World"]
+transform = Transform( 0.0149052, 0, 0, 0, 2.16436, 0, 0, 0, 0.0694457, 0.0138151, 1.01477, 0.46776 )
+shape = SubResource( 6 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="World"]
+transform = Transform( 0.00481476, -0.00114924, -0.00288248, 0.859137, -0.0597299, 4.87307, -0.0646303, -0.00201168, 0.00783484, -0.0334449, -0.722676, 0.34521 )
 mesh = SubResource( 7 )
-material/0 = SubResource( 8 )
+material/0 = null
+
+[node name="StaticBody2" type="StaticBody" parent="World"]
+transform = Transform( 0.00481476, -0.00114924, -0.00288248, 0.859137, -0.0597299, 4.87307, -0.0646303, -0.00201168, 0.00783484, -0.0334449, -0.722676, 0.34521 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="World"]
+transform = Transform( 0.00481476, -0.00114924, -0.00288248, 0.859137, -0.0597299, 4.87307, -0.0646303, -0.00201168, 0.00783484, -0.0334449, -0.722676, 0.34521 )
+shape = SubResource( 8 )
+
+[node name="StaticBody3" type="StaticBody" parent="World"]
+transform = Transform( 0.00481476, -0.00114924, -0.00288248, 0.859137, -0.0597299, 4.87307, -0.0646303, -0.00201168, 0.00783484, -0.0334449, -0.722676, 0.34521 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="World"]
+transform = Transform( 0.00481476, -0.00114924, -0.00288248, 0.859137, -0.0597299, 4.87307, -0.0646303, -0.00201168, 0.00783484, -0.0334449, -0.722676, 0.34521 )
+shape = SubResource( 9 )
+
+[node name="grass" type="MeshInstance" parent="World"]
+transform = Transform( 0.490546, 0, 0, 0, 0.416137, 0, 0, 0, 2.40158, 0, 0.0292983, 0.443615 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
 
 [node name="StaticBody" type="StaticBody" parent="World/grass"]
 
 [node name="CollisionShape" type="CollisionShape" parent="World/grass/StaticBody"]
-shape = SubResource( 9 )
-
-[node name="MeshInstance2" type="MeshInstance" parent="World/grass"]
-transform = Transform( 1, 0, 0, 0, 5.20108, 0, 0, 0, 1, 0.926862, 4.01053e-006, 0.347677 )
-mesh = SubResource( 10 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="World/grass/MeshInstance2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="World/grass/MeshInstance2/StaticBody"]
-shape = SubResource( 14 )
-
-[node name="MeshInstance" type="MeshInstance" parent="World/grass"]
-transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 1, -1.27314, 0, -1.05232 )
-mesh = SubResource( 11 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="World/grass/MeshInstance"]
-
-[node name="CollisionShape" type="CollisionShape" parent="World/grass/MeshInstance/StaticBody"]
-shape = SubResource( 15 )
+shape = SubResource( 12 )
 
 [node name="Sprite3D" type="Sprite3D" parent="World"]
 transform = Transform( 0.000582822, 0, 0, 0, 0.168714, 0, 0, 0, 0.015, 0.000370107, 1.1526, 0.405161 )
-material_override = SubResource( 19 )
-texture = ExtResource( 6 )
+material_override = SubResource( 13 )
+texture = ExtResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/Sprite3D"]
 autoplay = "bee"
-anims/bee = SubResource( 18 )
+anims/bee = SubResource( 14 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.972896, 0.0834423, -0.215663, 0.231243, -0.351062, 0.907349, 0, -0.932627, -0.360843, -0.109231, 4.39472, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.169812, -2.91497, 0, 0.102477, 4.83033, -3.17007, 3.18118, -13.4941 )
+mesh = SubResource( 15 )
+material/0 = SubResource( 16 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 17 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.145929, -3.82082, 0, 0.134322, 4.15097, -0.561003, 3.69822, -13.0182 )
+mesh = SubResource( 15 )
+material/0 = SubResource( 16 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance4/StaticBody"]
+shape = SubResource( 18 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.176409, -2.57856, 0, 0.0906502, 5.01799, -5.98135, 2.76182, -13.3327 )
+mesh = SubResource( 15 )
+material/0 = SubResource( 16 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance2/StaticBody"]
+shape = SubResource( 19 )
+
+[node name="MeshInstance" type="MeshInstance" parent="MeshInstance2"]
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.187355, -1.85125, 0, 0.0650813, 5.32936, -8.68745, 1.87145, -13.6874 )
+mesh = SubResource( 15 )
+material/0 = SubResource( 16 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance3/StaticBody"]
+shape = SubResource( 20 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+transform = Transform( 6.43358, 0, 0, 0, 0.184507, 0, 0, 0, 5.37793, -6, 0, -6 )
+mesh = SubResource( 21 )
+material/0 = SubResource( 22 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance5/StaticBody"]
+shape = SubResource( 23 )

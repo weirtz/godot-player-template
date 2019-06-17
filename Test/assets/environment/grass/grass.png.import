@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/nullnut_logo.png-349ab633606401aab5e94ffebebf2656.s3tc.stex"
-path.etc2="res://.import/nullnut_logo.png-349ab633606401aab5e94ffebebf2656.etc2.stex"
+path.s3tc="res://.import/grass.png-f55c169d67f767dae6b7d271b9010873.s3tc.stex"
+path.etc2="res://.import/grass.png-f55c169d67f767dae6b7d271b9010873.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://nullnut_logo.png"
-dest_files=[ "res://.import/nullnut_logo.png-349ab633606401aab5e94ffebebf2656.s3tc.stex", "res://.import/nullnut_logo.png-349ab633606401aab5e94ffebebf2656.etc2.stex" ]
+source_file="res://assets/environment/grass/grass.png"
+dest_files=[ "res://.import/grass.png-f55c169d67f767dae6b7d271b9010873.s3tc.stex", "res://.import/grass.png-f55c169d67f767dae6b7d271b9010873.etc2.stex" ]
 
 [params]
 
