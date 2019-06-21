@@ -1,5 +1,5 @@
-		extends KinematicBody
-
+extends Node
+class_name Movement
 
 #--------------------
 # General Variables
@@ -25,7 +25,7 @@ var speed = MAX_SPEED
 
 const JUMP_HEIGHT = 6
 var crouch
-var on_floor = is_on_floor()
+var on_floor 
 var has_contact = false
 # Slope Variables
 const MAX_SLOPE_ANGLE = 10
@@ -36,8 +36,8 @@ const FLY_ACCELERATION = 4
 const FLY_DEACCELERATION = 10
 var flying = false
 
-
-
+func _ready():
+	on_floor = $"../../../KinematicBody".is_on_floor()
 #-------------------------------------------
 #Walking Function---------------------------
 #-------------------------------------------
@@ -45,7 +45,8 @@ func walk(delta):
 	#Reset the direction of the player
 	direction = Vector3()
 	#Get rotation of camera
-	var aim = $Player_Camera.get_global_transform().basis
+	
+	var aim = $"../../Player_Camera".get_global_transform().basis
 
 	if(Input.is_action_pressed("move_fw")):
 		direction -= aim.z
@@ -64,23 +65,23 @@ func walk(delta):
 	direction = direction.normalized()
 	
 	#Double Verification if on floor, handles walking on slopes
-	if is_on_floor():
+	if $"../../../KinematicBody".is_on_floor():
 		has_contact = true
-		var n = $RayCast.get_collision_normal()
+		var n = $"../../RayCast".get_collision_normal()
 		var floor_angle = rad2deg(acos(n.dot(Vector3(0,1,0))))
 		if floor_angle > MAX_SLOPE_ANGLE:
 			velocity.y += (gravity + (gravity * floor_angle) / 5) * delta
 		print("fuck")
 	else:
-		if !$RayCast.is_colliding(): # if raycast is NOT colliding
+		if !$"../../RayCast".is_colliding(): # if raycast is NOT colliding
 			has_contact = false # raycast = false
 		#CREATES ERROR WITH IS_ON_FLOOR_VAR_FLOPPING \/
 		velocity.y += gravity * delta #removing makes is on floor false, but keeping it makes it flipflop
 		print("ASDASDASD")
 		
-	if has_contact and !is_on_floor():
+	if has_contact and !$"../../../KinematicBody".is_on_floor():
 		print("you")
-		move_and_collide(Vector3(0,-1, 0))
+		$"../../../KinematicBody".move_and_collide(Vector3(0,-1, 0))
 	
 	
 	var temp_velocity = velocity
@@ -98,10 +99,10 @@ func walk(delta):
 	
 	if Input.is_action_just_pressed("move_sprint"):
 		speed = MAX_RUNNING_SPEED
-		$Player_Camera.fov = 68
+		$"../../Player_Camera".fov = 68
 	if Input.is_action_just_released("move_fw"):
 		speed = MAX_SPEED
-		$Player_Camera.fov = 64
+		$"../../Player_Camera".fov = 64
 #	if Input.is_action_just_released("move_sprint"):
 #		speed = MAX_RUNNING_SPEED
 #		$Player_Camera.fov = fov + 5
@@ -129,7 +130,7 @@ func walk(delta):
 	
 	
 	#move
-	velocity = move_and_slide(velocity, Vector3(0,1,0))
+	velocity = $"../../../KinematicBody".move_and_slide(velocity, Vector3(0,1,0))
 	
 
 	

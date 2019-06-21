@@ -1,4 +1,6 @@
-		extends KinematicBody
+extends Node
+class_name Fly
+
 #--------------------
 # General Variables
 var velocity = Vector3()
@@ -26,7 +28,7 @@ func fly(delta):
 			#Reset the direction of the player
 	direction = Vector3()
 	#Get rotation of camera
-	var aim = $Positioning.get_global_transform().basis
+	var aim = $"../../Player_Camera".get_global_transform().basis
 
 	if(Input.is_action_pressed("move_fw")):
 		direction -= aim.z
@@ -58,6 +60,6 @@ func fly(delta):
 	velocity = velocity.linear_interpolate(target, fly_acceleration * delta)
 	
 	#move
-	velocity = move_and_slide(velocity, Vector3(0,1,0))
+	velocity = $"../../../KinematicBody".move_and_slide(velocity, Vector3(0,1,0))
 	
 

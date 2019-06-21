@@ -8,9 +8,32 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Control",
+"class": "Console",
+"language": "GDScript",
+"path": "res://scripts/player/console.gd"
+}, {
+"base": "Node",
+"class": "Fly",
+"language": "GDScript",
+"path": "res://scripts/player/fly.gd"
+}, {
+"base": "Node",
+"class": "Movement",
+"language": "GDScript",
+"path": "res://scripts/player/movement.gd"
+}, {
+"base": "KinematicBody",
+"class": "PlayerMain",
+"language": "GDScript",
+"path": "res://scripts/player/player_main.gd"
+} ]
 _global_script_class_icons={
-
+"Console": "",
+"Fly": "",
+"Movement": "",
+"PlayerMain": ""
 }
 
 [application]

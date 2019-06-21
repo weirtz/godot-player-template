@@ -1,8 +1,8 @@
-		extends KinematicBody
-var FLY = load("res://scripts/player/fly.gd").new()
-var MOVEMENT = load("res://scripts/player/movement.gd").new()
-var CONSOLE = load("res://scripts/player/console.gd").new()
+extends KinematicBody
+class_name PlayerMain
 
+onready var Movement = $movement/movement
+onready var Fly = $movement/fly
 
 #--------------------
 # General Variables
@@ -32,15 +32,16 @@ func aim():
 		camera_change = Vector2()
 		
 func _physics_process(delta):
-	CONSOLE.console()
+
 	aim()
-	
+	var flyer = $movement/fly
+	var mover = $movement/movement
 	if Input.is_action_just_pressed("fly"):
-		FLY.flying = !FLY.flying
-	if FLY.flying:
-		MOVEMENT.speed = MOVEMENT.MAX_SPEED
+		flyer.flying = !flyer.flying
+	if flyer.fly(delta):
+		Movement.speed = Movement.MAX_SPEED
 		$Player_Camera.fov = 64
-		FLY.fly(delta)
+		flyer.fly(delta)
 	else:
-		MOVEMENT.walk(delta)
+		mover.walk(delta)
 

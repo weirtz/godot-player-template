@@ -1,10 +1,12 @@
-		extends Control
+extends Control
+class_name Console
+
 var MOVEMENT = load("res://scripts/player/movement.gd").new()
 var FLY = load("res://scripts/player/fly.gd").new()
 
 
 func console():
-
+	$text_onfloor.add_text("false")
 	$text_fps.set_text("FPS: " + str(Engine.get_frames_per_second()))
 	if FLY.flying == false:
 		if Input.is_action_pressed("move_sprint"):
