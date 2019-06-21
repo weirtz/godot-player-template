@@ -6,13 +6,10 @@ class_name Movement
 var velocity = Vector3()
 var direction = Vector3()
 
-#--------------------
-# Mouse
-var mouse_sensitivity = 0.2
-var camera_angle = 0
+
 #--------------------
 # Walking
-var gravity = -9.8
+var gravity = -9.8 * 2
 const MAX_SPEED = 4
 const MAX_RUNNING_SPEED = 8
 const ACCELERATION = 2

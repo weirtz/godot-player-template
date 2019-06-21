@@ -32,7 +32,7 @@ func aim():
 		camera_change = Vector2()
 		
 func _physics_process(delta):
-
+	$"GUI/console".console()
 	aim()
 	var flyer = $movement/fly
 	var mover = $movement/movement
