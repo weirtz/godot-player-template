@@ -27,21 +27,20 @@ func aim():
 	
 		var change = -camera_change.y * mouse_sensitivity
 		if change + camera_angle < 90 and change + camera_angle > -90:
-			$Player_Camera.rotate_x(deg2rad(change))
+			$PlayerCamera.rotate_x(deg2rad(change))
 			camera_angle += change
 		camera_change = Vector2()
 		
 func _physics_process(delta):
+	aim()	
 	$"GUI/console".console()
-	aim()
-	var flyer = $movement/fly
-	var mover = $movement/movement
+	
 	if Input.is_action_just_pressed("fly"):
-		flyer.flying = !flyer.flying
-	if flyer.fly(delta):
-		Movement.speed = Movement.MAX_SPEED
-		$Player_Camera.fov = 64
-		flyer.fly(delta)
+		$PlayerMovement/Fly.flying = !$PlayerMovement/Fly.flying
+	if $PlayerMovement/Fly.flying:
+		$PlayerMovement/Movement.speed = $PlayerMovement/Movement.MAX_SPEED
+		$PlayerCamera.fov = 64
+		$PlayerMovement/Fly.fly(delta)
 	else:
-		mover.walk(delta)
+		$PlayerMovement/Movement.walk(delta)
 

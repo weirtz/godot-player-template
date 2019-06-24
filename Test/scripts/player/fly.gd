@@ -28,7 +28,7 @@ func fly(delta):
 			#Reset the direction of the player
 	direction = Vector3()
 	#Get rotation of camera
-	var aim = $"../../Player_Camera".get_global_transform().basis
+	var aim = $"../../PlayerMovement".get_global_transform().basis
 
 	if(Input.is_action_pressed("move_fw")):
 		direction -= aim.z

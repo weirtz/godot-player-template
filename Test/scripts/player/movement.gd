@@ -5,8 +5,6 @@ class_name Movement
 # General Variables
 var velocity = Vector3()
 var direction = Vector3()
-
-
 #--------------------
 # Walking
 var gravity = -9.8 * 2
@@ -17,21 +15,12 @@ const DEACCELERATION = 20
 var speed = MAX_SPEED
 #--------------------
 # Movement
-
-#max jumps of 0 will give you 2 jumps aka double jump
-
 const JUMP_HEIGHT = 6
 var crouch
-var on_floor 
+var on_floor
 var has_contact = false
 # Slope Variables
 const MAX_SLOPE_ANGLE = 10
-#--------------------
-# Flying
-const FLY_SPEED = 10
-const FLY_ACCELERATION = 4
-const FLY_DEACCELERATION = 10
-var flying = false
 
 func _ready():
 	on_floor = $"../../../KinematicBody".is_on_floor()
@@ -43,7 +32,7 @@ func walk(delta):
 	direction = Vector3()
 	#Get rotation of camera
 	
-	var aim = $"../../Player_Camera".get_global_transform().basis
+	var aim = $"../../PlayerCamera".get_global_transform().basis
 
 	if(Input.is_action_pressed("move_fw")):
 		direction -= aim.z
@@ -64,6 +53,7 @@ func walk(delta):
 	#Double Verification if on floor, handles walking on slopes
 	if $"../../../KinematicBody".is_on_floor():
 		has_contact = true
+		on_floor = $"../../../KinematicBody".is_on_floor()
 		var n = $"../../RayCast".get_collision_normal()
 		var floor_angle = rad2deg(acos(n.dot(Vector3(0,1,0))))
 		if floor_angle > MAX_SLOPE_ANGLE:
@@ -72,6 +62,7 @@ func walk(delta):
 	else:
 		if !$"../../RayCast".is_colliding(): # if raycast is NOT colliding
 			has_contact = false # raycast = false
+			on_floor = $"../../../KinematicBody".is_on_floor()
 		#CREATES ERROR WITH IS_ON_FLOOR_VAR_FLOPPING \/
 		velocity.y += gravity * delta #removing makes is on floor false, but keeping it makes it flipflop
 		print("ASDASDASD")
@@ -96,10 +87,10 @@ func walk(delta):
 	
 	if Input.is_action_just_pressed("move_sprint"):
 		speed = MAX_RUNNING_SPEED
-		$"../../Player_Camera".fov = 68
+		$"../../PlayerCamera".fov = 68
 	if Input.is_action_just_released("move_fw"):
 		speed = MAX_SPEED
-		$"../../Player_Camera".fov = 64
+		$"../../PlayerCamera".fov = 64
 #	if Input.is_action_just_released("move_sprint"):
 #		speed = MAX_RUNNING_SPEED
 #		$Player_Camera.fov = fov + 5
