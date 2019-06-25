@@ -2,20 +2,9 @@ extends Node
 class_name Fly
 
 #--------------------
-# General Variables
+# General 
 var velocity = Vector3()
 var direction = Vector3()
-
-
-#--------------------
-# Walking
-
-const MAX_SPEED = 4
-const MAX_RUNNING_SPEED = 8
-const ACCELERATION = 2
-const DEACCELERATION = 20
-
-
 #--------------------
 # Flying
 const FLY_SPEED = 10
@@ -23,9 +12,8 @@ const FLY_ACCELERATION = 4
 const FLY_DEACCELERATION = 10
 var flying = false
 
-	
 func fly(delta):
-			#Reset the direction of the player
+	#Reset the direction of the player
 	direction = Vector3()
 	#Get rotation of camera
 	var aim = $"../../PlayerMovement".get_global_transform().basis
@@ -47,11 +35,9 @@ func fly(delta):
 	#Where would the player go at max speed
 	var target = direction * FLY_SPEED
 	#calculate a portion of the disatance to go	
-
-
-	
 	var fly_acceleration
 	var temp_velocity = velocity
+	
 	if direction.dot(temp_velocity) > 0:
 		fly_acceleration = FLY_ACCELERATION
 	else:
@@ -61,5 +47,3 @@ func fly(delta):
 	
 	#move
 	velocity = $"../../../KinematicBody".move_and_slide(velocity, Vector3(0,1,0))
-	
-
