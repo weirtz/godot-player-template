@@ -16,7 +16,7 @@ func fly(delta):
 	#Reset the direction of the player
 	direction = Vector3()
 	#Get rotation of camera
-	var aim = $"../../PlayerMovement".get_global_transform().basis
+	var aim = get_owner().get_node("PlayerMovement").get_global_transform().basis
 
 	if(Input.is_action_pressed("move_fw")):
 		direction -= aim.z
@@ -32,6 +32,7 @@ func fly(delta):
 		direction += aim.y * 1.5
 		
 	direction = direction.normalized()
+	
 	#Where would the player go at max speed
 	var target = direction * FLY_SPEED
 	#calculate a portion of the disatance to go	
@@ -46,4 +47,4 @@ func fly(delta):
 	velocity = velocity.linear_interpolate(target, fly_acceleration * delta)
 	
 	#move
-	velocity = $"../../../KinematicBody".move_and_slide(velocity, Vector3(0,1,0))
+	velocity = get_owner().move_and_slide(velocity, Vector3(0,1,0))
