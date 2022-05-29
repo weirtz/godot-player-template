@@ -122,7 +122,6 @@ func walk(delta):
 	velocity = $"../../../KinematicBody".move_and_slide(velocity, Vector3(0,1,0))
 		
 	if Input.is_action_pressed("move_squat"):
-		$"../../PlayerCamera".transform(0, -2, 0)
-		$"../../PlayerCamera".translate(0, -2, 0)
+		pass
 		
 		

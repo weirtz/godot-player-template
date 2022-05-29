@@ -75,7 +75,6 @@ script = ExtResource( 1 )
 [node name="KinematicBody" parent="." instance=ExtResource( 2 )]
 
 [node name="World" type="Spatial" parent="."]
-editor/display_folded = true
 
 [node name="Floor" type="MeshInstance" parent="World"]
 transform = Transform( 46.0174, 0, 0, 0, 0.128943, 0, 0, 0, 41.3515, 0, 0, 0 )
@@ -88,7 +87,7 @@ material/0 = SubResource( 6 )
 shape = SubResource( 7 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="World"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 20.8096, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20.8096, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="World"]
 transform = Transform( 4.19451, 0, 0, 0, 2.77021, 0, 0, 0, 3.18994, 0, 0, -19.3601 )
@@ -140,6 +139,6 @@ material/0 = SubResource( 17 )
 shape = SubResource( 18 )
 
 [node name="MeshInstance" type="MeshInstance" parent="World/MeshInstance5"]
-transform = Transform( 1, 0, 0, 0, 1, 1.52588e-005, 0, 1.16415e-010, 1, 0, 125.349, 0.467264 )
+transform = Transform( 1, 0, 0, 0, 1, 1.52588e-05, 0, 1.16415e-10, 1, 0, 125.349, 0.467264 )
 mesh = SubResource( 19 )
 material/0 = null
